@@ -29,18 +29,18 @@ export const CategoryDropdown = ({
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    
+
     if (category.subcategories) {
       setIsOpen(true);
     }
   };
-  
+
   const onMouseLeave = useCallback(() => {
     // Clear any existing timeout
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    
+
     // Set a new timeout to close the dropdown
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
@@ -48,7 +48,7 @@ export const CategoryDropdown = ({
   }, []);
 
   const dropdownPosition = getDropdownPosition();
-  
+
   return (
     <>
       <div
@@ -59,7 +59,7 @@ export const CategoryDropdown = ({
       >
         <Button
           className={cn(
-            "bg-primary text-white hover:bg-transparent hover:border-primary hover:border-1 rounded-xl hover:text-primary transition-colors border-transparent h-11 px-4",
+            "bg-primary text-white rounded-xl transition-colors h-11 px-4 border border-transparent hover:bg-transparent hover:border-primary hover:text-primary",
             isActive &&
               !isNavigationHovered &&
               "bg-secondary text-white hover:bg-primary hover:border-primary hover:text-white"
@@ -67,23 +67,25 @@ export const CategoryDropdown = ({
         >
           {category.categories}
         </Button>
-        {category.subcategories && category.subcategories.docs && category.subcategories.docs.length > 0 && (
-          <div
-            className={cn(
-              "opacity-0 absolute -bottom-3 w-0 h-0 border-l-[10px] border-l-transparent border-r-transparent border-b-[10px] border-b-black left-1/2 -translate-x-1/2",
-              isOpen && "opacity-100"
-            )}
-          />
-        )}
+        {category.subcategories &&
+          category.subcategories.docs &&
+          category.subcategories.docs.length > 0 && (
+            <div
+              className={cn(
+                "opacity-0 absolute -bottom-3 w-0 h-0 border-l-[10px] border-r-[10px] border-l-transparent border-r-transparent border-b-[10px] border-b-black left-1/2 -translate-x-1/2",
+                isOpen && "opacity-100"
+              )}
+            />
+          )}
       </div>
 
-            <SubcategoryMenu
-         category={category}
-         isOpen={isOpen}
-         position={dropdownPosition}
-         onMouseEnter={onMouseEnter}
-         onMouseLeave={onMouseLeave}
-       />
+      <SubcategoryMenu
+        category={category}
+        isOpen={isOpen}
+        position={dropdownPosition}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      />
     </>
   );
 };
