@@ -33,7 +33,7 @@ export const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
             <Link
               key={items.href}
               href={items.href}
-              className="w-full text-left p-4 hover:bg-primary hover:text-white flex items-center text-base font-medium"
+              className="w-full text-left p-4 hover:bg-primary hover:text-primary-foreground flex items-center text-base font-medium"
             >
               {items.children}
             </Link>
@@ -41,13 +41,13 @@ export const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
           <div className="border-t">
             <Link
               href="/sign-in"
-              className="w-full text-left p-4 hover:bg-primary hover:text-white flex items-center text-base font-medium"
+              className="w-full text-left p-4 hover:bg-primary hover:text-primary-foreground flex items-center text-base font-medium"
             >
               Log in
             </Link>
             <Link
               href="/sign-in"
-              className="w-full text-left p-4 hover:bg-primary hover:text-white flex items-center text-base font-medium"
+              className="w-full text-left p-4 hover:bg-primary hover:text-primary-foreground flex items-center text-base font-medium"
             >
               Start Selling
             </Link>
