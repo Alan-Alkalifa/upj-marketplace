@@ -1,8 +1,9 @@
-import { Category } from "@/payload-types";
 import Link from "next/link";
+import { CustomCategory } from "../types";
+import { Category } from "@/payload-types";
 
 interface Props {
-  category: Category;
+  category: CustomCategory;
   isOpen: boolean;
   position: { top: number; left: number };
   onMouseEnter?: () => void;
@@ -16,19 +17,17 @@ export const SubcategoryMenu = ({
   onMouseEnter, 
   onMouseLeave 
 }: Props) => {
-  console.log("SubcategoryMenu props:", {
+  ( {
     isOpen,
     category: category.categories,
     subcategories: category.subcategories,
   });
 
-  if (
-    !isOpen ||
-    !category.subcategories ||
-    !category.subcategories.docs ||
-    category.subcategories.docs.length === 0
-  ) {
-    console.log("SubcategoryMenu returning null");
+  const docsRaw: (string | Category)[] = Array.isArray(category.subcategories)
+    ? (category.subcategories as unknown as (string | Category)[])
+    : (category.subcategories?.docs ?? []);
+  const objectDocs: Category[] = docsRaw.filter((d): d is Category => typeof d !== "string");
+  if (!isOpen || objectDocs.length === 0) {
     return null;
   }
 
@@ -47,12 +46,11 @@ export const SubcategoryMenu = ({
           className="w-60 rounded-md overflow-hidden border"
         >
           <div>
-            {category.subcategories.docs?.map((subcategory) => {
-              if (typeof subcategory === "string") return null;
+            {objectDocs.map((subcategory) => {
               return (
                 <Link
                   key={subcategory.slug }
-                  href="/"
+                  href={`/${category.slug}/${subcategory.slug}`}
                   className="w-full text-left p-4 hover:bg-primary hover:text-white flex justify-between items-center underline font-medium"
                 >
                   {subcategory.categories}

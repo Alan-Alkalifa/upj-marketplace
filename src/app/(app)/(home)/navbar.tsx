@@ -19,9 +19,9 @@ const NavbarItem = ({ href, children, isActive }: NavbarItemProps) => {
     <Button
       asChild
       className={cn(
-        "bg-transparent hover:bg-primary text-primary rounded-xl hover:text-white transition-colors border-transparent px-3.5 text-lg",
+        "bg-transparent hover:bg-primary text-primary rounded-xl hover:text-primary-foreground transition-colors border-transparent px-3.5 text-lg",
         isActive &&
-          "bg-secondary text-white hover:bg-primary hover:border-primary hover:text-white"
+          "bg-primary text-primary-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground"
       )}
     >
       <Link href={href}>{children}</Link>
@@ -39,10 +39,10 @@ export const Navbar = () => {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
-    <nav className="h-20 flex border-b justify-between font-medium bg-white">
-      <Link href="/" className="pl-6 flex items-center">
+    <nav className="h-20 px-4 flex border-b justify-between font-medium bg-white">
+      <Link href="/" className="flex items-center">
         <span className={cn("text-5xl font-semibold text-primary")}>
-          Marketplace
+          UPJ
         </span>
       </Link>
 
@@ -64,24 +64,24 @@ export const Navbar = () => {
         ))}
       </div>
 
-      <div className="hidden lg:flex lg:pr-6">
+      <div className="hidden lg:flex">
         <Button
           variant="secondary"
-          className="border-l border-t-0 border-b-0 border-r-0 h-full rounded-none bg-white text-primary hover:bg-primary hover:text-white transition-colors text-lg "
+          className="border-l border-t-0 border-b-0 border-r-0 h-full rounded-none bg-background text-primary hover:bg-primary hover:text-primary-foreground transition-colors text-lg "
         >
           Log in
         </Button>
         <Button
           variant="secondary"
-          className="border-l border-t-0 border-b-0 border-r-0 h-full rounded-none bg-primary text-white hover:bg-primary transition-colors text-lg "
+          className="border-l border-t-0 border-b-0 border-r-0 h-full rounded-none bg-primary text-primary-foreground hover:bg-primary transition-colors text-lg "
         >
           Start Selling
         </Button>
       </div>
 
-      <div className="flex lg:hidden items-center justify-center pr-6">
+      <div className="flex lg:hidden items-center justify-center">
         <Button
-          className="size-12 border-transparent bg-primary"
+          className=" border-transparent bg-primary text-primary-foreground"
           onClick={() => setIsSidebarOpen(true)}
         >
           <MenuIcon />
